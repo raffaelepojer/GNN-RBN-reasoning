@@ -248,7 +248,7 @@ def write_mlp_layer_ACR(prob_name, current_layer, model):
 
     return result
 
-def write_final_classifier_ACR(prob_name, model):
+def write_final_graph_classifier_ACR(prob_name, model):
     result = ""
     classifier_weights = extract_weights(model, "linear.weight")
     classifier_bias = extract_weights(model, "linear.bias")
@@ -262,6 +262,26 @@ def write_final_classifier_ACR(prob_name, model):
         
         result += "\t" + f"{classifier_bias[current_row].item():.30f}" + "\n"
         result += "\tWITH sum\n\tFORALL;\n"
+
+        result += "\n"
+    return result
+
+def write_final_node_formula_ACR(prob_name, model, mlp):
+    # TODO: add the mlp layer
+    assert mlp == False, "MLP layer not yet supported for the final node classifier"
+    result = ""
+    classifier_weights = extract_weights(model, "linear.weight")
+    classifier_bias = extract_weights(model, "linear.bias")
+
+    for current_row in range(len(classifier_weights)):
+        result += prob_name + "([node]v)= COMBINE\n"
+
+        for idx in range(len(classifier_weights[current_row])):
+            result += "\t(" + f"{classifier_weights[current_row][idx].item():.30f}" + "*@" + \
+                prob_name + "_layer_" + str(len(model.layers)) + "_" + str(idx) + "(v)),\n"
+        
+        result += "\t" + f"{classifier_bias[current_row].item():.30f}" + "\n"
+        result += "\tWITH l-reg\n\tFORALL;\n"
 
         result += "\n"
     return result

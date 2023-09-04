@@ -15,8 +15,8 @@ from datetime import datetime
 from utils.early_stopper import EarlyStopper
 from rbn.gnn_to_rbn import *
 from utils.utils import *
+import utils.read_alpha
 from torch.utils.tensorboard import SummaryWriter
-
 
 def train(model, data, criterion, optimizer, device="cpu"):
     model.train()
@@ -27,15 +27,15 @@ def train(model, data, criterion, optimizer, device="cpu"):
         optimizer.zero_grad()
         batch = batch.to(device)
         out = model(batch.x, batch.edge_index, batch.batch)
-        target = batch.y
-        l = criterion(out, target)
-        _, pred = out.max(1)
+        target = batch.node_labels
+        out = torch.squeeze(out)
+        l = criterion(out, target.float())
 
-        tt = (pred == target).sum().item()
+        pred = (torch.sigmoid(out) > 0.5).long()
+
+        tt = len(np.where(target == pred)[0])
         t += tt
         f += len(target)-tt
-
-        # l = criterion(out.reshape([-1]), target.float())
 
         epoch_loss += l.detach().item()
         l.backward()
@@ -44,7 +44,6 @@ def train(model, data, criterion, optimizer, device="cpu"):
     accuracy = t/(t+f)
     avg_loss = epoch_loss/len(data)
     return avg_loss, accuracy
-
 
 def test(model, data, criterion, device="cpu"):
     model.eval()
@@ -55,15 +54,14 @@ def test(model, data, criterion, device="cpu"):
         batch = batch.to(device)
         with torch.no_grad():
             out = model(batch.x, batch.edge_index, batch.batch)
-        target = batch.y
-        l = criterion(out, target)
+        target = batch.node_labels
+        out = torch.squeeze(out)
+        l = criterion(out, target.float())
 
-        # l = criterion(out.reshape([-1]), target.float())
         epoch_loss += l.detach().item()
-        _, pred = out.max(1)
+        pred = (torch.sigmoid(out) > 0.5).long()
 
-        # tt = len(torch.where(target == pred)[0])
-        tt = (pred == target).sum().item()
+        tt = len(torch.where(target == pred)[0])
         t += tt
         f += len(target)-tt
 
@@ -77,17 +75,6 @@ def seed_everything(seed):
     torch.manual_seed(seed)
     np.random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
-
-
-def main(
-        args,
-        train_data=None,
-        test_data=None,
-        save_gnn_model=None,
-        save_rbn_model=None,
-        plot=None):
-    pass
-
 
 def train_test(seed,
                hidden_dim,
@@ -125,33 +112,47 @@ def train_test(seed,
         create_folder_if_not_exists(tensorboard_path)
         writer = SummaryWriter(log_dir=tensorboard_path)
 
-    path = osp.join(osp.dirname(osp.realpath(__file__)),
-                    '../', 'datasets')
-    dataset = TUDataset(path, name=ds_name).shuffle()
-    print(dataset)
+    alpha = 1
+    basedir = '/Users/raffaelepojer/Dev/RBN-GNN/datasets/alpha'
+    data_dir = basedir + '/p' + str(alpha)+ '_a_small/'
 
-    # keep the 10% of the dataset for validation
-    val_dataset = dataset[:int(len(dataset)*0.1)]
-    # keep the 90% of the dataset for training and testing
-    dataset = dataset[int(len(dataset)*0.1):]
-    val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE)
+    # data_stem_train = "train-random-erdos-5000-40-50.txt" 
+    # data_stem_test_1 = "test-random-erdos-500-40-50.txt"
+    # data_stem_test_2 = "test-random-erdos-500-51-60.txt"
+
+    data_stem_train = "train-barabasi-m2_2-5000-5-8.txt" 
+    data_stem_test_1 = "test-barabasi-m2_2-500-5-8.txt"
+    data_stem_test_2 = "test-barabasi-m2_2-500-10-15.txt"
+    
+    
+    data_train, _ = utils.read_alpha.load_data(
+                        dataset=data_dir+data_stem_train,
+                        degree_as_node_label=False)
+    data_test_1, _ = utils.read_alpha.load_data(
+                        dataset=data_dir+data_stem_test_1,
+                        degree_as_node_label=False)
+    data_test_2, _ = utils.read_alpha.load_data(
+                        dataset=data_dir+data_stem_test_2,
+                        degree_as_node_label=False)
+
+    dataset = data_train + data_test_1
+
+    train_loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
+    test_loader_2 = DataLoader(data_test_2, batch_size=BATCH_SIZE, shuffle=False)
 
     # get the feature dimension
-    feature_dim = dataset.num_features
+    feature_dim = next(iter(train_loader)).x.shape[1]
     print("feature dim: {}".format(feature_dim))
 
     splits = KFold(n_splits=k, shuffle=True)  # , random_state=42)
 
-    model = MYACRGnnGraph(
+    model = MYACRGnnNode(
         input_dim=feature_dim,
         hidden_dim=hidden_dim,
         num_layers=gnn_layers,
-        mlp_layers=mlp_layers,
+        mlp_layers=0,
         final_read=final_readout,
-        num_classes=2,
-        fwd_dp=fwd_dp,
-        lin_dp=lin_dp,
-        mlp_dp=mlp_dp
+        num_classes=1
     )
 
     model.to(device)
@@ -170,8 +171,9 @@ def train_test(seed,
 
     # optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
-    loss = nn.CrossEntropyLoss()
-    for fold, (train_idx, test_idx) in enumerate(splits.split(np.arange(len(dataset)))):
+    loss = nn.BCEWithLogitsLoss(reduction='mean')
+
+    for fold, (train_idx, test_idx) in enumerate(splits.split(np.arange(len(train_loader)))):
         early_stopper = EarlyStopper(patience=50, min_delta=0.05)
 
         if schedule_lr_fold > 0 and fold > 0:
@@ -240,7 +242,7 @@ def train_test(seed,
     text += "final train accuracy:\t{}\n".format(train_acc)
     _, test_acc = test(model, test_loader, loss, device)
     text += "final test accuracy:\t{}\n".format(test_acc)
-    _, val_acc = test(model, val_loader, loss, device)
+    _, val_acc = test(model, test_loader_2, loss, device)
     text += "final val accuracy:\t{}\n".format(val_acc)
     print(text)
     print("*"*40)
@@ -248,20 +250,17 @@ def train_test(seed,
 
     # export model
     if test_acc > min_acc:
-        print("saving model")
         # feature_names = [chr(i) for i in range(97, 97+feature_dim)]
-        # feature_names = ["Carbon", "Nitrogen", "Oxygen", "Fluorine", "Iodine", "Chlorine", "Bromine"]
-        feature_names = ["C", "O", "Cl", "H", "N", "F",
-                         "Br", "S", "P", "I", "Na", "K", "Li", "Ca"]
-        feature_probs = [0.5]*feature_dim
+        feature_names = ["blue", "green", "red", "yellow", "purple"]
+        feature_probs = [0.3] + [0.175]*4
 
         base_name = f"{file_stem}" + "_" + \
             f"{print_list_with_underscores(hidden_dim)}"
-        rbn_name = experiment_path + "/" + base_name + "_" + final_readout + ".rbn"
-        gnn_name = experiment_path + "/" + base_name + "_" + final_readout + ".pt"
+        rbn_name = experiment_path + "/" + base_name + ".rbn"
+        gnn_name = experiment_path + "/" + base_name + ".pt"
 
-        write_rbn_ACR_graph(rbn_name, model, ds_name, feature_names, feature_probs,
-                            constraints=True, soft_prob=0.99, read_type=final_readout)
+        write_rbn_ACR_node(rbn_name, model, ds_name, feature_names, feature_probs,
+                            constraints=False, soft_prob=0.99, read_type=final_readout)
 
         torch.save(model.state_dict(), gnn_name)
         print("Files written to: ", experiment_path)
@@ -280,16 +279,16 @@ if __name__ == "__main__":
     BATCH_SIZE = 64
     k=3
     final_readout = "add"
-    ds_name = "Mutagenicity"
+    ds_name = "alpha1"
     save_logs = True
-    hidden_dim = [16, 8, 8]
+    hidden_dim = [20]
     mlp_layers = 0
-    fwd_dp = 0.15
-    lin_dp = 0.15
+    fwd_dp = 0.0
+    lin_dp = 0.0
     mlp_dp = 0.0
 
     schedule_lr_fold = 0
-    num_of_experiments = 4
+    num_of_experiments = 3
     seeds = random_list(num_of_experiments, 1, 100)
     train_accs = []
     test_accs = []

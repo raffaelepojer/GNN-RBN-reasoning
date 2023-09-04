@@ -3,7 +3,6 @@ import torch.nn as nn
 from torch_geometric.nn import global_add_pool, global_mean_pool
 from torch_geometric.nn.conv import MessagePassing
 from .mlp import MLP
-
 class MYACRConv(MessagePassing):
     def __init__(self, in_channels, out_channels, mlp_layers=0, mlp_dp=0):
         super().__init__(aggr='add', flow="source_to_target")

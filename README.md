@@ -6,6 +6,8 @@ In the python directory there are the main file that are the experiments present
 - For the experiments with the Alpha problem run **main_kfold_blue.py**. 
 - For the synthetic dataset experiments run **main_kfold_triangle.py**. 
 - For the Mutagenicity experiments run **main_kfold_mutag.py**.
+
+
 All the python files with kfold will generate multiple experiments and will report the results in txt files. Each experiments will be inside a directory with the name of the seed used.
 
 ## How to work with Primula

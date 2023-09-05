@@ -1,11 +1,37 @@
 # GNN-RBN
 Code for the paper PAPER NAME.
 
-## Replicate the results:
-In the python directory there are the main file that are the experiments presented in the paper. The dataset are in the repository. For the Mutagenicity dataset from TUDataset, it is automatically downloaded into the dataset folder when you run the experiment.
-- For the experiments with the Alpha problem run **main_kfold_blue.py**. 
-- For the synthetic dataset experiments run **main_kfold_triangle.py**. 
-- For the Mutagenicity experiments run **main_kfold_mutag.py**.
+## Replicating the Results
+
+To replicate the results presented in the paper, follow these steps:
+
+### Experiments Setup
+
+1. **Navigate to the Python Directory**:
+   - Locate the Python directory in the repository. This is where the experiments are located.
+
+2. **Dataset Preparation**:
+   - Ensure that the required datasets are available in the repository.
+   - For the Mutagenicity dataset from TUDataset, it will be automatically downloaded into the dataset folder when you run the experiment.
+
+### Running Experiments
+
+#### Alpha Problem Experiments
+
+- To replicate the experiments related to the Alpha problem, execute the following script:
+   - Run **main_kfold_blue.py**.
+
+#### Synthetic Dataset Experiments
+
+- To replicate the experiments with synthetic datasets, execute the following script:
+   - Run **main_kfold_triangle.py**.
+
+#### Mutagenicity Experiments
+
+- To replicate the experiments with the Mutagenicity dataset, execute the following script:
+   - Run **main_kfold_mutag.py**.
+
+These scripts contain the necessary code to run the experiments and generate results similar to those presented in the paper. Ensure that you have the required datasets and dependencies in place before running the experiments.
 
 
 All the python files with kfold will generate multiple experiments and will report the results in txt files. Each experiments will be inside a directory with the name of the seed used.

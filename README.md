@@ -10,14 +10,29 @@ In the python directory there are the main file that are the experiments present
 
 All the python files with kfold will generate multiple experiments and will report the results in txt files. Each experiments will be inside a directory with the name of the seed used.
 
-## How to work with Primula
-With the generated RBN we can infer the same problem of the examples in the paper. In the folder **rdef_files** there are contained some base graphs to use in Primula. The .rdef file are just definition of a graph for the Primula system, each node is declared with its type and arguments it takes. If you want to change the prior probability for some relation in the RBN definition, change it directly to the .rbn file, usually are on the top.
+## How to Work with Primula
 
-Here the steps that are needed to start replicating the examples with Primula:
-- Download and compile primula from the original [GitHub repository](https://github.com/manfred-jaeger-aalborg/primula3). The main class is RBNgui.Primula, in the function loadDefaults() you can write the path of the .rbn and .rdef files without using the gui
-- The Model source is for the .rbn file and the Data source is for the .rdef file
-- Click on Modules -> Bavaria to see the graphs. Click and activate both the top toggles to see the Input structure and the Probabilistic Relations.
-- Click on Modules -> Inference Module for the inference part.
+Once you have generated the RBN, you can perform inference using Primula. In the **rdef_files** folder, you'll find base graphs that can be used with Primula. These .rdef files define the structure of a graph for the Primula system, including node types and their arguments. If you need to modify prior probabilities for relations in the RBN definition, you can typically find them at the top of the .rbn file.
+
+To replicate examples using Primula, follow these steps:
+
+1. **Download and Compile Primula**:
+   - Download Primula from the original [GitHub repository](https://github.com/manfred-jaeger-aalborg/primula3).
+   - The primary class is `RBNgui.Primula`. In the `loadDefaults()` function, you can specify the paths to the .rbn and .rdef files without using the GUI.
+
+2. **Set Model and Data Sources**:
+   - Use the Model source for the .rbn file.
+   - Use the Data source for the .rdef file.
+
+3. **View Graphs in Bavaria**:
+   - Click on `Modules -> Bavaria` to visualize the graphs.
+   - Activate both top toggles to display the Input structure and the Probabilistic Relations.
+
+4. **Perform Inference**:
+   - Access the Inference Module by clicking on `Modules -> Inference Module` for the inference part.
+
+Following these steps will allow you to work with Primula and perform inference using the generated RBN, replicating examples from the paper.
+
   
 ## Replicate the MAP experiments with the Synthetic dataset:
 

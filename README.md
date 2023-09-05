@@ -15,6 +15,9 @@ With the generated RBN we can infer the same problem of the examples in the pape
 
 ## Conda environment
 The PyTorch version used was the 2.0.1 and torch-geometric 2.3.1
+
 If one wants to have the exact same conda environment just use the file **environment.yml** in the repository.
-`conda env create -f environment.yml
-conda env create -f environment.yml`
+
+
+`conda env create -f environment.yml`
+`conda activate my-experiment-env`

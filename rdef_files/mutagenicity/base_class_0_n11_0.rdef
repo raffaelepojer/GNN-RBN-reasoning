@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+	<Relations>
+		<Rel name="node" arity="1" argtypes="Domain" valtype="boolean" default="false" type="predefined" color="(100,100,100)"/>
+		<Rel name="edge" arity="2" argtypes="node,node" valtype="boolean" default="?" type="probabilistic" color="(0,70,0)"/>
+		<Rel name="C" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(226,51,145)"/>
+		<Rel name="O" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(104,207,249)"/>
+		<Rel name="Cl" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(14,175,80)"/>
+		<Rel name="H" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(166,165,227)"/>
+		<Rel name="N" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(0,254,95)"/>
+		<Rel name="F" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(30,130,167)"/>
+		<Rel name="Br" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(157,92,24)"/>
+		<Rel name="S" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(18,206,208)"/>
+		<Rel name="P" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(77,59,210)"/>
+		<Rel name="I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(197,229,133)"/>
+		<Rel name="Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(1,38,140)"/>
+		<Rel name="K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(128,170,40)"/>
+		<Rel name="Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(247,219,131)"/>
+		<Rel name="Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(133,237,221)"/>
+		<Rel name="const_C_O" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_Cl" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_H" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_N" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_F" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_Br" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_S" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_P" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_C_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_Cl" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_H" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_N" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_F" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_Br" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_S" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_P" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_O_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_H" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_N" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_F" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_Br" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_S" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_P" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Cl_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_N" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_F" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_Br" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_S" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_P" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_H_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_N_F" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_N_Br" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_N_S" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_N_P" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_N_I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_N_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_N_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_N_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_N_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_F_Br" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_F_S" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_F_P" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_F_I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_F_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_F_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_F_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_F_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Br_S" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Br_P" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Br_I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Br_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Br_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Br_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Br_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_S_P" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_S_I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_S_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_S_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_S_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_S_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_P_I" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_P_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_P_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_P_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_P_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_I_Na" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_I_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_I_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_I_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Na_K" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Na_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Na_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_K_Li" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_K_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="const_Li_Ca" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="all_const" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="soft_max_0" arity="0" argtypes="" valtype="boolean" default="?" type="probabilistic"/>
+		<Rel name="soft_max_1" arity="0" argtypes="" valtype="boolean" default="?" type="probabilistic"/>
+	</Relations>
+	<Data>
+		<DataForInputDomain>
+			<Domain>
+				<obj ind='0' name='n0' coords='900.0,700.0' />
+				<obj ind='1' name='n1' coords='868.2507065662362,808.1281634911195' />
+				<obj ind='2' name='n2' coords='783.0830026003773,881.9263990709037' />
+				<obj ind='3' name='n3' coords='671.537032345343,897.9642883761866' />
+				<obj ind='4' name='n4' coords='569.027853210943,851.1499148708517' />
+				<obj ind='5' name='n5' coords='508.1014052771005,756.346511368286' />
+				<obj ind='6' name='n6' coords='508.1014052771005,643.653488631714' />
+				<obj ind='7' name='n7' coords='569.027853210943,548.8500851291483' />
+				<obj ind='8' name='n8' coords='671.5370323453429,502.0357116238134' />
+				<obj ind='9' name='n9' coords='783.0830026003772,518.0736009290963' />
+				<obj ind='10' name='n10' coords='868.2507065662362,591.8718365088804' />
+			</Domain>
+			<PredefinedRels>
+				<d rel="node" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="true"/>
+			</PredefinedRels>
+			<ProbabilisticRelsCase>
+				<d rel="const_C_O" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_Cl" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_H" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_N" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_F" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_Br" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_S" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_P" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_I" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_C_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_Cl" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_H" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_N" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_F" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_Br" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_S" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_P" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_I" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_O_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_H" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_N" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_F" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_Br" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_S" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_P" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_I" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Cl_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_N" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_F" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_Br" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_S" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_P" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_I" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_H_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_N_F" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_N_Br" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_N_S" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_N_P" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_N_I" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_N_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_N_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_N_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_N_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_F_Br" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_F_S" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_F_P" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_F_I" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_F_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_F_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_F_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_F_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Br_S" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Br_P" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Br_I" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Br_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Br_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Br_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Br_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_S_P" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_S_I" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_S_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_S_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_S_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_S_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_P_I" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_P_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_P_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_P_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_P_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_I_Na" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_I_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_I_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_I_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Na_K" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Na_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Na_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_K_Li" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_K_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="const_Li_Ca" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="false"/>
+				<d rel="all_const" args="(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)(n8)(n9)(n10)" val="true"/>
+			</ProbabilisticRelsCase>
+		</DataForInputDomain>
+	</Data>
+</root>

@@ -1,23 +1,17 @@
 import random
 import os
-import os.path as osp
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import random_split, SubsetRandomSampler
 from torch_geometric.loader import DataLoader
-from torch_geometric.datasets import TUDataset
-from utils.TU_dataset_reader import tud_to_networkx
 import utils.read_alpha
-import networkx as nx
-import matplotlib.pyplot as plt
 import math
 from gnn import *
-from sklearn.model_selection import KFold
 from datetime import datetime
 from utils.early_stopper import EarlyStopper
 from rbn.gnn_to_rbn import *
 from utils.utils import *
+from argparse import ArgumentParser 
 from torch.utils.tensorboard import SummaryWriter
 
 def train(model, data, criterion, optimizer, device="cpu"):
@@ -77,30 +71,31 @@ def seed_everything(seed):
     np.random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
 
-if __name__ == "__main__":
-    seed_everything(1)
+def main(args):
+    seed_everything(args.seed)
     device = torch.device("cpu")
 
     # ACR-GNN definition
-    hidden_dim = [10, 5]
+    hidden_dim = args.hidden_dim
     gnn_layers = len(hidden_dim)
     # feature_dim = 7
-
-    epochs = 1000
-    final_readout = "add"
-    lr = 0.001
+    epochs = args.epochs
+    final_readout = args.final_readout
+    lr = args.lr
     min_acc = 0.0
 
-    # Dataset definition
-    BATCH_SIZE = 64
+    BATCH_SIZE = args.batch_size
 
-    ds_name = "alpha1"
-    save_logs = True
-    save_rbn = True
+    ds_name = args.ds_name
+    save_logs = args.save_logs
+    save_rbn = args.save_rbn
     alpha = 1
-    basedir = '/Users/raffaelepojer/Dev/RBN-GNN/datasets/alpha'
-    data_dir = basedir + '/p' + str(alpha)+ '_a_small/'
 
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    data_dir = os.path.join(script_dir, '..', 'datasets', 'alpha', f"p{alpha}_a_small")
+
+    # original dataset
     # data_stem_train = "train-random-erdos-5000-40-50.txt" 
     # data_stem_test_1 = "test-random-erdos-500-40-50.txt"
     # data_stem_test_2 = "test-random-erdos-500-51-60.txt"
@@ -111,13 +106,13 @@ if __name__ == "__main__":
     
     
     data_train, _ = utils.read_alpha.load_data(
-                        dataset=data_dir+data_stem_train,
+                        dataset=os.path.join(data_dir, data_stem_train),
                         degree_as_node_label=False)
     data_test_1, _ = utils.read_alpha.load_data(
-                        dataset=data_dir+data_stem_test_1,
+                        dataset=os.path.join(data_dir, data_stem_test_1),
                         degree_as_node_label=False)
     data_test_2, _ = utils.read_alpha.load_data(
-                        dataset=data_dir+data_stem_test_2,
+                        dataset=os.path.join(data_dir, data_stem_test_2),
                         degree_as_node_label=False)
 
     train_loader = DataLoader(data_train, batch_size=BATCH_SIZE, shuffle=True)
@@ -132,7 +127,7 @@ if __name__ == "__main__":
         input_dim=feature_dim,
         hidden_dim=hidden_dim,
         num_layers=gnn_layers,
-        mlp_layers=0,
+        mlp_layers=0, # mlp not currently supported
         final_read=final_readout,
         num_classes=1
     )
@@ -140,11 +135,10 @@ if __name__ == "__main__":
     model.to(device)
 
     gnn_layers_string = print_list_with_underscores(hidden_dim)
-    experiment_path = f"/Users/raffaelepojer/Dev/RBN-GNN/models/" + ds_name + \
-        "_" + gnn_layers_string + "_" + datetime.now().strftime("%Y%m%d-%H%M%S") + "/"
-    file_stem = "RBN_acr_graph_" + ds_name
-    tensorboard_path = experiment_path + "tensorboard/"
-    
+    experiment_path = os.path.join(script_dir, '..', 'models', f"{ds_name}_{gnn_layers_string}_{datetime.now().strftime('%Y%m%d-%H%M%S')}")
+    file_stem ="RBN_acr_graph_" + ds_name
+    tensorboard_path = os.path.join(experiment_path, "tensorboard")
+
     if save_rbn:
         create_folder_if_not_exists(experiment_path)
     if save_logs:
@@ -219,19 +213,33 @@ if __name__ == "__main__":
     if test_acc > min_acc and save_rbn:
         # feature_names = [chr(i) for i in range(97, 97+feature_dim)]
         feature_names = ["blue", "green", "red", "yellow", "purple"]
-        feature_probs = [0.3] + [0.175]*4
+        feature_probs = [0.5] * 5
 
         base_name = f"{file_stem}" + "_" + \
             f"{print_list_with_underscores(hidden_dim)}"
-        rbn_name = experiment_path + "/" + base_name + ".rbn"
-        gnn_name = experiment_path + "/" + base_name + ".pt"
-
+        rbn_name = os.path.join(experiment_path, base_name + ".rbn")
+        gnn_weights = os.path.join(experiment_path, base_name + ".pt")
         write_rbn_ACR_node(rbn_name, model, ds_name, feature_names, feature_probs,
-                            constraints=False, soft_prob=0.99, read_type=final_readout)
+                            constraints=args.constraints, soft_prob=0.99, read_type=final_readout)
 
-        torch.save(model.state_dict(), gnn_name)
+        torch.save(model.state_dict(), gnn_weights)
         print("Files written to: ", experiment_path)
 
     if save_logs:
         writer.flush()
         writer.close()
+
+if __name__ == "__main__":
+    parser = ArgumentParser(description="ACR-GNN for blue experiment")
+    parser.add_argument("--seed", type=int, default=1, help="seed")
+    parser.add_argument("--hidden_dim", nargs="+", type=int, default=[10, 5], help="Hidden layer dimensions")
+    parser.add_argument("--final_readout", type=str, default="add", help="Final readout function")
+    parser.add_argument("--lr", type=float, default=0.001, help="Learning rate")
+    parser.add_argument("--epochs", type=int, default=1000, help="Number of epochs")
+    parser.add_argument("--batch_size", type=int, default=64, help="Batch size")
+    parser.add_argument("--constraints", type=bool, default=True, help="Constraints for RBN")
+    parser.add_argument("--ds_name", type=str, default="alpha1", help="Dataset name")
+    parser.add_argument("--save_logs", type=bool, default=True, help="Save logs")
+    parser.add_argument("--save_rbn", type=bool, default=True, help="Save RBN")
+    args = parser.parse_args()
+    main(args)

@@ -6,8 +6,6 @@ import torch
 import torch.nn as nn
 from torch.utils.data import random_split, SubsetRandomSampler
 from torch_geometric.loader import DataLoader
-from torch_geometric.datasets import TUDataset
-from utils.TU_dataset_reader import tud_to_networkx
 import math
 from gnn import *
 from sklearn.model_selection import KFold
@@ -16,6 +14,7 @@ from utils.early_stopper import EarlyStopper
 from rbn.gnn_to_rbn import *
 from utils.utils import *
 import pickle
+from argparse import ArgumentParser
 from torch.utils.tensorboard import SummaryWriter
 
 
@@ -81,16 +80,6 @@ def seed_everything(seed):
     os.environ['PYTHONHASHSEED'] = str(seed)
 
 
-def main(
-        args,
-        train_data=None,
-        test_data=None,
-        save_gnn_model=None,
-        save_rbn_model=None,
-        plot=None):
-    pass
-
-
 def train_test(seed,
                hidden_dim,
                max_epochs,
@@ -114,12 +103,12 @@ def train_test(seed,
     # feature_dim = 7
 
     gnn_layers_string = print_list_with_underscores(hidden_dim)
-    experiment_base_path = f"/Users/raffaelepojer/Dev/RBN-GNN/models/" + ds_name + \
-        "_" + gnn_layers_string + "_" + date + "/"
-    experiment_path = experiment_base_path + "exp_" + str(seed) + "/"
+    script_path = os.path.dirname(os.path.realpath(__file__))
+    experiment_base_path = os.path.join(script_path, "..", "models", ds_name + "_" + gnn_layers_string + "_" + date)
+    experiment_path = os.path.join(experiment_base_path, "exp_" + str(seed))
     file_stem = "rbn_acr_graph_" + ds_name
 
-    tensorboard_path = experiment_path + "tensorboard/"
+    tensorboard_path = os.path.join(experiment_path, "tensorboard")
     if save_logs:
         create_folder_if_not_exists(experiment_base_path)
         create_folder_if_not_exists(experiment_path)
@@ -128,7 +117,6 @@ def train_test(seed,
 
     path = osp.join(osp.dirname(osp.realpath(__file__)),
                     '../', 'datasets/Synthetic/'+ds_name+'/')
-
     print(path)
     with open(path + 'graph_list_5_10_7000_7000.pt', 'rb') as f:
         dataset = pickle.load(f)
@@ -165,18 +153,11 @@ def train_test(seed,
 
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=lr, weight_decay=0.0001)
-
-    # for name, param in model.named_parameters():
-    #     if "mlp" in name:
-    #         param.requires_grad = True
-    #         param.lr = lr / 2
-
-    # optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    
     loss = nn.CrossEntropyLoss()
     for fold, (train_idx, test_idx) in enumerate(splits.split(np.arange(len(dataset)))):
         early_stopper = EarlyStopper(patience=50, min_delta=0.01)
-        # if fold > 0:
-        #     lr *= 0.5
+
         optimizer = torch.optim.AdamW(
             model.parameters(), lr=lr, weight_decay=0.0001)
 
@@ -244,25 +225,23 @@ def train_test(seed,
     text += "final val accuracy:\t{}\n".format(val_acc)
     print(text)
     print("*"*40)
-    write_string_to_file(experiment_path + "results.txt", text)
+    write_string_to_file(os.path.join(experiment_path, "results.txt"), text)
 
     # export model
     if test_acc > min_acc:
         print("saving model")
         feature_names = [chr(i) for i in range(65, 65+feature_dim)]
-        # feature_names = ["Carbon", "Nitrogen", "Oxygen", "Fluorine", "Iodine", "Chlorine", "Bromine"]
-        # feature_names = ["C", "O", "Cl", "H", "N", "F", "Br", "S", "P", "I", "Na", "K", "Li", "Ca"]
         feature_probs = [0.5]*feature_dim
 
         base_name = f"{file_stem}" + "_" + \
             f"{print_list_with_underscores(hidden_dim)}"
-        rbn_name = experiment_path + "/" + base_name + "_" + final_readout + ".rbn"
-        gnn_name = experiment_path + "/" + base_name + "_" + final_readout + ".pt"
+        rbn_name = os.path.join(experiment_path, base_name + "_" + final_readout + ".rbn")
+        gnn_weights = os.path.join(experiment_path, base_name + "_" + final_readout + ".pt")
 
         write_rbn_ACR_graph(rbn_name, model, ds_name, feature_names, feature_probs,
-                            constraints=True, soft_prob=0.99, read_type=final_readout)
+                            constraints=args.constraints, soft_prob=0.99, read_type=final_readout)
 
-        torch.save(model.state_dict(), gnn_name)
+        torch.save(model.state_dict(), gnn_weights)
         print("Files written to: ", experiment_path)
 
     if save_logs:
@@ -272,22 +251,22 @@ def train_test(seed,
     return model, train_acc, test_acc, val_acc, experiment_base_path
 
 
-if __name__ == "__main__":
+def main(args):
     min_acc = 0.0
-    lr = 0.001
-    max_epochs = 200
-    BATCH_SIZE = 64
-    k=3
-    final_readout = "add"
-    ds_name = "triangle"
-    save_logs = True
-    hidden_dim = [10, 8, 6]
+    lr = args.lr
+    max_epochs = args.max_epochs
+    BATCH_SIZE = args.batch_size
+    k=args.k
+    final_readout = args.final_readout
+    ds_name = args.ds_name
+    save_logs = args.save_logs
+    hidden_dim = args.hidden_dim
     mlp_layers = 0
     fwd_dp = 0.1
     lin_dp = 0.1
-    mlp_dp = 0.3
+    mlp_dp = 0.0
 
-    num_of_experiments = 4
+    num_of_experiments = args.num_exp
     seeds = random_list(num_of_experiments, 1, 100)
     train_accs = []
     test_accs = []
@@ -343,4 +322,21 @@ if __name__ == "__main__":
     text += "BATCH_SIZE: {}\n".format(BATCH_SIZE)
     text += "k: {}\n".format(k)
     print(text)
-    write_string_to_file(exp_path + "results.txt", text)
+    write_string_to_file(os.path.join(exp_path, "results.txt"), text)
+
+
+if __name__ == "__main__":
+    parser = ArgumentParser(description="ACR-GNN for blue experiment with k-fold cross validation on multiple seeds")
+    parser.add_argument("--num_exp", type=int, default=3, help="Number of experiments")
+    parser.add_argument("--hidden_dim", nargs="+", type=int, default=[16, 8, 6], help="Hidden layer dimensions")
+    parser.add_argument("--k", type=int, default=3, help="Number of folds")
+    parser.add_argument("--final_readout", type=str, default="add", help="Final readout function")
+    parser.add_argument("--lr", type=float, default=0.001, help="Learning rate")
+    parser.add_argument("--max_epochs", type=int, default=200, help="Max number of epochs")
+    parser.add_argument("--batch_size", type=int, default=64, help="Batch size")
+    parser.add_argument("--constraints", type=bool, default=True, help="Constraints for RBN")
+    parser.add_argument("--ds_name", type=str, default="triangle", help="Dataset name")
+    parser.add_argument("--save_logs", type=bool, default=True, help="Save logs")
+    parser.add_argument("--save_rbn", type=bool, default=True, help="Save RBN")
+    args = parser.parse_args()
+    main(args)

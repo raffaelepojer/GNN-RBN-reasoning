@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <root> 
+        <Relations>
+            <Rel name="node" arity="1" argtypes="Domain" valtype="boolean" default="false" type="predefined" color="(100,100,100)"/>
+            <Rel name="edge" arity="2" argtypes="node,node" valtype="boolean" default="false" type="predefined" color="(0,70,0)"/>
+            <Rel name="green" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(51,204,0)"/>
+            <Rel name="red" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(255,0,51)"/>
+            <Rel name="blue" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(0,0,200)"/>
+            <Rel name="yellow" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(255,255,0)"/>
+            <Rel name="purple" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(204,0,204)"/>
+            <Rel name="alpha1" arity="1" argtypes="node" valtype="boolean" default="?" type="probabilistic" color="(200,255,100)"/>
+        </Relations>
+        <Data> 
+            <DataForInputDomain> 
+            <!--0--> 
+            <Domain> 
+                <obj ind='0' name='n0' coords='900.0,700.0' /> 
+                <obj ind='1' name='n1' coords='841.4213562373095,841.4213562373095' /> 
+                <obj ind='2' name='n2' coords='700.0,900.0' /> 
+                <obj ind='3' name='n3' coords='558.5786437626905,841.4213562373095' /> 
+                <obj ind='4' name='n4' coords='500.0,700.0' /> 
+                <obj ind='5' name='n5' coords='558.5786437626905,558.5786437626905' /> 
+                <obj ind='6' name='n6' coords='700.0,500.0' /> 
+                <obj ind='7' name='n7' coords='841.4213562373095,558.5786437626905' /> 
+            </Domain> 
+                <PredefinedRels> 
+                    <d rel='node' args='(n0)(n1)(n2)(n3)(n4)(n5)(n6)(n7)' val='true'/> 
+                    <d rel='edge' args='(n0,n1)(n0,n2)(n0,n3)(n0,n4)(n0,n5)(n0,n6)(n1,n5)(n2,n3)(n2,n7)(n3,n4)(n3,n6)(n4,n7)' val='true'/> 
+                </PredefinedRels> 
+                <ProbabilisticRelsCase> 
+                    <d rel='green' args='(n0)' val='true'/> 
+                    <d rel='red' args='(n2)' val='true'/> 
+                    <d rel='yellow' args='(n5)(n6)' val='true'/> 
+                    <d rel='purple' args='(n4)' val='true'/> 
+                    <d rel='alpha1' args='(n1)(n3)(n5)(n6)(n7)' val='true'/> 
+                    <d rel='alpha1' args='(n0)(n2)(n4)' val='false'/> 
+                </ProbabilisticRelsCase> 
+            </DataForInputDomain> 
+        </Data> 
+    </root> 

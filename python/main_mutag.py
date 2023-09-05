@@ -80,16 +80,6 @@ def seed_everything(seed):
     os.environ['PYTHONHASHSEED'] = str(seed)
 
 
-def main(
-        args,
-        train_data=None,
-        test_data=None,
-        save_gnn_model=None,
-        save_rbn_model=None,
-        plot=None):
-    pass
-
-
 if __name__ == "__main__":
     seed_everything(1)
     device = torch.device("cpu")

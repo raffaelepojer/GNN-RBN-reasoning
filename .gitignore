@@ -1,5 +1,8 @@
-datasets
+datasets/MUTAG
+datasets/Mutagenicity
 models
+python/inference
+*.ipynb
 .DS_Store
 __pycache__
 utils/converter

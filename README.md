@@ -103,7 +103,7 @@ Following these steps will allow you to work with Primula and perform inference 
 ### Additional Analysis
 
 - **Perform Additional Analysis**:
-   - In the repository, there is a folder (FOLDER NAME) containing a Jupyter notebook to parse the saved .rdef file and feed it into the trained model to check the probability.
+   - In the repository, there is a file called **test_prob.py** to parse the saved .rdef file and feed it into the trained model to check the probability.
    - Alternatively, you can perform this analysis using the **MCMC** module of Primula.
 
 

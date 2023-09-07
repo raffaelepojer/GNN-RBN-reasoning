@@ -60,34 +60,29 @@ Following these steps will allow you to work with Primula and perform inference 
 ### Loading .rdn and .rdef Files
 
 - Load the .rdn and .rdef files into Primula.
-- Proceed to the Interface Module.
+- Proceed to the Interface Module from the Modules menu.
 
 ### Setting Queries for Attributes or Binary Relations
 
-1. **Configure Queries for Attributes and Binary Relations**:
-   - In the Interface Module, configure various Attributes or Binary relations (edges).
-   - To generate the most probable graph for a given class, utilize the MAP module.
+Open the **Inference Module** to configure various Attributes or Binary relations (edges) and generate the most probable graph for a given class, using the MAP module.
    
-2. **Attribute Queries**:
-   - Click the **Query** button and select the attributes you want to query for each node.
-   - In the synthetic example, each node has 7 possible attributes [A, B, C, D, E, F, G].
-   - Click on one attribute and double-click on the `[node*]` element in the Element names list. This assigns the selected Attributes to all nodes.
-   - Repeat this process for all 7 attributes (Note: the Query button can only be clicked on the first attempt).
+1. **Attribute Queries**:
+   - Click the **Query** button to enter in the "query mode", and select the attributes you want to query for each node. In the synthetic example, each node has 7 possible attributes [A, B, C, D, E, F, G]. In order to do this, click on one attribute (e.g. C) and click on the `[node*]` element in the **Element names** list. This assigns the selected Attributes to all nodes.
+   - Repeat this process for all 7 attributes (Note: the Query button can only be clicked on the first time).
    
-3. **Edge Queries**:
-   - Assign all possible edge combinations to the nodes by clicking the **Query** button, selecting the edge attribute in the Binary relations list, and double-clicking again on the `[node*]` element.
+2. **Edge Queries**:
+   - Assign all possible edge combinations to the nodes by selecting the edge attribute in the Binary relations list, and double-clicking again on the `[node*]` element (this require to be in the "query mode", click on the Query button to enter in this mode).
 
 ### Selecting the Class
 
 - **Choose the Class for Computation**:
-   - Set the class for which you want to compute the most probable graph.
-   - In the compiled RBN, all positive classes are assigned to the Arbitrary relation `soft_max_0/0`.
+   - Set the class for which you want to compute the most probable graph. In the compiled RBN, all positive classes are assigned to the **Arbitrary relation** `soft_max_0/0`, negative to `soft_max_1/0`.
    - Click the **True** button and then click on the `soft_max_0/0` relation to assign it as the true value.
 
 ### Computing MAP
 
 1. **Perform MAP Computation**:
-   - Start the MAP computation by clicking the MAP button and then clicking the **Settings MAP** button.
+   - Start the MAP computation by clicking the **MAP** button and then clicking the **Settings MAP** button.
    - A new window will open, allowing you to set the number of restarts you want (-1 to stop manually or another value, e.g., 10).
    
 2. **Executing MAP Computation**:

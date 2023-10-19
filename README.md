@@ -55,7 +55,7 @@ Following these steps will allow you to work with Primula and perform inference 
 
 - The results are stored in a file named `results.txt`, representing the average of multiple experiments.
 - Inside each experiment's folder, you will find a .rbn file that should be imported into Primula.
-- The [`rdef_files/synthetic`](https://github.com/raffaelepojer/RBN-GNN/tree/main/rdef_files/synthetic) directory contains the rdef files for the experiments, ranging from 2-node graphs to 9-node graphs.
+- The `rdef_files/synthetic` directory contains the rdef files for the experiments, ranging from 2-node graphs to 9-node graphs.
 
 ### Loading .rdn and .rdef Files
 

@@ -165,7 +165,7 @@ if __name__ == "__main__":
     model.to(device)
 
     gnn_layers_string = print_list_with_underscores(hidden_dim)
-    experiment_path = f"/Users/raffaelepojer/Dev/RBN-GNN/models/" + ds_name + \
+    experiment_path = f"/Users/USERNAME/Dev/RBN-GNN/models/" + ds_name + \
         "_" + gnn_layers_string + "_" + datetime.now().strftime("%Y%m%d-%H%M%S") + "/"
     file_stem = "RBN_acr_graph_" + ds_name
     tensorboard_path = experiment_path + "tensorboard/"

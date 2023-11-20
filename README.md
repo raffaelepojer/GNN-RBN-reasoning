@@ -1,5 +1,5 @@
 # GNN-RBN
-Code for the paper PAPER NAME.
+Code for the paper "Generalized Reasoning with Graph Neural Networks by Relational Bayesian Network Encodings".
 
 # Replicate the Results
 
@@ -20,6 +20,8 @@ To replicate the paper's results, follow these steps:
 These scripts contain the code to replicate the paper's experiments. Ensure dataset availability and dependencies before execution.
 
 ## How to Work with Primula
+
+More examples can be found in `examples-primula` in this repo.
 
 Once you have generated the RBN, you can perform inference using Primula. In the **rdef_files** folder, you'll find base graphs that can be used with Primula. These .rdef files define the structure of a graph for the Primula system, including node types and their arguments. If you need to modify prior probabilities for relations in the RBN definition, you can typically find them at the top of the .rbn file.
 
@@ -71,7 +73,7 @@ Open the **Inference Module** to configure various Attributes or Binary relation
    - Repeat this process for all 7 attributes (Note: the Query button can only be clicked on the first time).
    
 2. **Edge Queries**:
-   - Assign all possible edge combinations to the nodes by selecting the edge attribute in the Binary relations list, and double-clicking again on the `[node*]` element (this require to be in the "query mode", click on the Query button to enter in this mode).
+   - Assign all possible edge combinations to the nodes by selecting the edge attribute in the Binary relations list, and double-clicking again on the `[node*]` element (this requires to be in the "query mode", click on the Query button to enter in this mode).
 
 ### Selecting the Class
 
@@ -93,7 +95,7 @@ Open the **Inference Module** to configure various Attributes or Binary relation
 
 - **Viewing Computed Values**:
    - View the computed values from Bavaria.
-   - Save these results in an .rdef file by clicking on the Primula main interface's **Save Data** option under the **Run** menu.
+   - Save these results in a .rdef file by clicking on the Primula main interface's **Save Data** option under the **Run** menu.
 
 ### Additional Analysis
 
